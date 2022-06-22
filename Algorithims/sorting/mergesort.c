@@ -1,10 +1,4 @@
-// Merge sort implementation that sorts
-
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
-float randomFloat(void) { return rand() % 100 + rand() % 100 * .01; }
 
 void merge(float array[], int start, int median, int end) {
   // Counters
@@ -14,7 +8,7 @@ void merge(float array[], int start, int median, int end) {
   int sizeLeft = median - start + 1;
   int sizeRight = end - median;
 
-  // Creating  sub arrays
+  // Creating sub arrays
   float leftArr[sizeLeft];
   float rightArr[sizeRight];
 
@@ -42,6 +36,8 @@ void merge(float array[], int start, int median, int end) {
     k++;
   }
 
+  // In the case where either the left or right elements have not been
+  // completely added to the main array The remaining elements are added
   while (i < sizeLeft) {
     array[k] = leftArr[i];
     i++;
@@ -65,29 +61,4 @@ void mergesort(float array[], int start, int end) {
 
     merge(array, start, median, end); // Merge sort this current half
   }
-}
-
-int main(int argc, char **argv) {
-  // Seeding the time base
-  srand(time(0));
-
-  // Validating the input
-  if (argc < 2 || argc >> 2) {
-    printf("Invalid Use\n"
-           "USAGE :: ./mergesort <<size of the array>>\n");
-
-    return -1;
-  }
-
-  int sizeOfArray = (int)atol(argv[1]);
-  float array[sizeOfArray];
-
-  // Filling the array
-  for (int i = 0; i < sizeOfArray; i++) {
-    array[i] = randomFloat();
-  }
-
-  mergesort(array, 0, sizeOfArray);
-
-  return 0;
 }
